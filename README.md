@@ -3,7 +3,7 @@
 
 This project's objective was to propagate the trajectory of a spacecraft orbiting the Sun for 20 years. It compares using Cowell's and Encke's Methods for propagating perturbed orbits, and provides methods for obtaining the osculating orbits.
 
-The spaceship is equipped with an efficient electric propulsion system providing a tangential thrust acceleration $\mathbf{a}$<sub>T</sub> $= a_{T,0} \left(\frac{1 \ au}{r}\right)^2 \frac{\mathbf{v}}{v}$, where $a_{T,0} = \frac{1}{3}\cdot 10^{-4}$ m/s $^2$ is the thrust's acceleration at 1 au, $r$ the distance to the Sun and $\mathbf{v}/v$ the unit vector along the spacecraft's velocity. It is assumed that the thruster is always active, and that propellant consumption and additional perturbations are negligible (thus $dm/dt = 0$, $\mathbf{a}_d = \mathbf{a}_T$). 
+The spaceship is equipped with an efficient electric propulsion system providing a tangential thrust acceleration $\mathbf{a}$<sub>T</sub> $= a_{T,0} \left(\frac{1 \ au}{r}\right)^2 \frac{\mathbf{v}}{v}$, where $a_{T,0} = \frac{1}{3}\cdot 10^{-4}$ m/s $^2$ is the thrust's acceleration at 1 au, $r$ the distance to the Sun and $\mathbf{v}/v$ the unit vector along the spacecraft's velocity. It's assumed that the thruster is always active, and that propellant consumption and additional perturbations are negligible. Thus $dm/dt = 0$, $\mathbf{a}_d = \mathbf{a}_T$. 
 
 
 The 2-body perturbed equations of motion are:
@@ -18,9 +18,15 @@ where $\mu \in \mathbb R$ is the Sun’s gravitational parameter and and $\mathb
 
 
 ## Method & Results
- To solve the problem numerically, the equations of motion were converted to a 1st order ODE by introducing the augmented state vector $\mathbf{x} =[\mathbf{r,v}]$, with time derivative $d{\mathbf{x}}/dt =[v_x,v_y,v_z,a_{d_x}-\frac{\mu r_x}{r^3},a_{d_y}-\frac{\mu r_y}{r^3}, a_{d_z}-\frac{\mu r_z}{r^3}]$.
+To solve the problem numerically, the equations of motion were converted to a 1st order ODE by introducing the augmented state vector $\mathbf{x} =[\mathbf{r,v}]$, with time derivative
 
-The initial conditions in the Sun-centred inertial frame were set as $\mathbf{r}$<sub>0</sub>$=-1.05\mathbf{\hat{i}}$ au and $\mathbf{v}$<sub>0</sub> $=-6.1316\mathbf{\hat{j}}$ au/year. Despite the problem being 2D, the codebase supports the propagation of 3D orbits. Propagating forward in time for 20 years using Cowell's Method and Encke's Method leads to the following perturbed trajectory (Sun not to scale):
+$$
+\frac{d\mathbf{x}}{dt} = \left[ v_x,\ v_y,\ v_z,\  a_{d_x}-\frac{\mu r_x}{r^3},\  a_{d_y}-\frac{\mu r_y}{r^3},\  a_{d_z}-\frac{\mu r_z}{r^3} \right]
+$$
+
+The initial conditions in the Sun-centred inertial frame were set as
+$\mathbf{r}_0 = -1.05\,\mathbf{e}_x\ \mathrm{au}$ and
+$\mathbf{v}_0 = -6.1316\,\mathbf{e}_y\ \mathrm{au/yr}$. Despite the problem being 2D, the codebase supports the propagation of 3D orbits. Propagating forward in time for 20 years using Cowell's Method and Encke's Method leads to the following perturbed trajectory (Sun not to scale):
 
 <p align="middle">
     <img src="./media/fig2.png" width="99%" />  
